@@ -1,0 +1,15 @@
+name: Upload
+run-name: ${{ github.actor }} is Uploading Apple association file
+on: [push]
+jobs:
+  upload:
+    name: Upload Apple association file.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MrFlynn/upload-to-netlify-action@v2.1.1
+        with:
+          source-file: ".well-known/apple-developer-merchantid-domain-association.txt"
+          destination-path: "/.well-known/apple-developer-merchantid-domain-association.txt"
+          site-name: justjogging
+          branch-name: main
+          netlify-token: ${{ secrets.UPLOAD_FILE }}
