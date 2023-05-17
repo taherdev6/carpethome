@@ -11,5 +11,5 @@ jobs:
         with:
           source-file: "/well-known/apple-developer-merchantid-domain-association"
           destination-path: "/.well-known/apple-developer-merchantid-domain-association"
-          site-name: justjogging
+          site-name: just-jogging
           netlify-token: ${{secrets.NETLIFY_TOKEN}}
