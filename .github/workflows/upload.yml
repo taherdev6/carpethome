@@ -6,7 +6,7 @@ jobs:
     name: Upload Apple association file
     runs-on: ubuntu-latest
     steps:
-      - uses: MrFlynn/upload-to-netlify-action@v2.1.1
+      - uses: MrFlynn/upload-to-netlify-action@v3
         with:
           source-file: ".well-known/apple-developer-merchantid-domain-association"
           destination-path: "/.well-known/apple-developer-merchantid-domain-association"
