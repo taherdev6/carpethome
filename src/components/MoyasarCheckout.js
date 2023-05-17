@@ -36,7 +36,12 @@ const fetchPrice = async () => {
       'visa',
       'mastercard',
   ],
-    methods: ['creditcard'],
+    methods: ['creditcard', 'applepay'],
+    apple_pay: {
+      country: 'SA',
+      label: 'Just Jogging',
+      validate_merchant_url: 'https://api.moyasar.com/v1/applepay/initiate',
+  },
   })
   
 }
