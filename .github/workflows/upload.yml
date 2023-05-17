@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: MrFlynn/upload-to-netlify-action@v3
         with:
-          source-file: "well-known/apple-developer-merchantid-domain-association"
+          source-file: "/well-known/apple-developer-merchantid-domain-association"
           destination-path: "/.well-known/apple-developer-merchantid-domain-association"
           site-name: justjogging
           netlify-token: ${{ secrets.UPLOAD_FILE }}
