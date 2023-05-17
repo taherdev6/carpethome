@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is Uploading Apple association file
 on: [push]
 jobs:
 env:
-      NETLIFY_TOKEN: WRZMNJCoqk_8oEUJkCWurr8vBDDN3zvmxpKKdmy07Sk
+      NETLIFY_TOKEN: "WRZMNJCoqk_8oEUJkCWurr8vBDDN3zvmxpKKdmy07Sk"
   upload:
     name: Upload Apple association file
     runs-on: ubuntu-latest
