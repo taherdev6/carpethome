@@ -26,7 +26,7 @@ const fetchPrice = async () => {
     amount: res,
     currency: 'SAR',
     description: `Clothing Order`,
-    publishable_api_key: 'pk_test_u3ugqTQXF2GgjMXv4yacfppcmkqLVvSCCcfw98F9',
+    publishable_api_key: process.env.MOYASAR_PUBLISHABLE_KEY,
     callback_url: 'http://localhost:8888/greetings',
     on_initiating: () => {
       localStorage.setItem('pending', true)

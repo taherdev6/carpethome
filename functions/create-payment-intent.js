@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Moyasar = require('moyasar');
-const moyasar = new Moyasar('sk_test_AZCUdcR3NUd8EZMEGsdEcHweEEDKQPMF2KV5MbBu')
+const moyasar = new Moyasar(process.env.MOYASAR_SECRET_KEY)
 
 const Airtable = require('airtable-node');
 const airtable = new Airtable({
