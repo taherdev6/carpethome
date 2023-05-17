@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: MrFlynn/upload-to-netlify-action@v3
+      - uses: actions/checkout@v3
         with:
           source-file: "/well-known/apple-developer-merchantid-domain-association"
           destination-path: "/.well-known/apple-developer-merchantid-domain-association"
