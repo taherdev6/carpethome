@@ -62,7 +62,7 @@ function App() {
           />
 
           <Route path="/products/:id" element={<SingleProduct />}></Route>
-          <Route path="*" element={<Error />} />
+          {/* <Route path="*" element={<Error />} /> */}
         </Routes>
         <Footer />
       </Router>
