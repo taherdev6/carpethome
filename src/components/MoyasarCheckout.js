@@ -11,7 +11,7 @@ import CreditCardForm from './CreditCardForm';
 const CheckoutForm = () => {
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
   const { myUser, handlePending, paymentPending } = useUserContext();
-  
+  console.log(myUser)
 const el = document.createElement('div')
 const moyasar = window.Moyasar;
 
@@ -23,7 +23,7 @@ const fetchPrice = async () => {
 
   moyasar.init({
     element: el,
-    amount: res.reduce((acc, p) => acc + p, 0),
+    amount: res,
     currency: 'SAR',
     description: `Clothing Order`,
     publishable_api_key: 'pk_test_u3ugqTQXF2GgjMXv4yacfppcmkqLVvSCCcfw98F9',
@@ -51,7 +51,7 @@ useEffect(() => document.querySelector('.credit-card-form').append(el), [])
 
   return <div className='mysr-form'>
     <article>
-          <h4>Hello, {myUser ? myUser.multiFactor.user.displayName : 'User'}</h4>
+          <h4>Hello, {myUser ? myUser.displayName : 'User'}</h4>
           <p>Your total is {formatPrice(shipping_fee + total_amount)}</p>
           
         </article>

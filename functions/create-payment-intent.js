@@ -5,13 +5,19 @@ const moyasar = new Moyasar('sk_test_AZCUdcR3NUd8EZMEGsdEcHweEEDKQPMF2KV5MbBu')
 const Airtable = require('airtable-node');
 const airtable = new Airtable({
   apiKey: process.env.AIRTABLE_PERSONAL_ACCESS_TOKEN,
-})
-  .base(process.env.AIRTABLE_BASE)
+}) .base(process.env.AIRTABLE_BASE)
   .table(process.env.AIRTABLE_TABLE);
+
+  const base = new Airtable({apiKey: process.env.AIRTABLE_SET_USER_INFO_PAT}).base(process.env.AIRTABLE_BASE).table(process.env.AIRTABLE_USER_INFO_TABLE)
 exports.handler = async function (event, context) {
   if (event.body) {
     const { id, status, message, amount, cart, shipping } = JSON.parse(event.body);
     
+    
+      
+    const createRecord = async (fields) => {
+      const createdRecord = await base.create(fields);
+    }
     
 
     try {
@@ -33,19 +39,15 @@ exports.handler = async function (event, context) {
         } )
       )
 
-      if(!result.includes(false) && data.status === 'paid' && data.currency === 'SAR')
+      if(!result.includes(false) && data.status === 'paid')
       {
         const{ fullName}= shipping;
         const {phoneNumber }= shipping;
-        const shipCart = cart.map(product => {
+        const shipCart = result.map(product => {
           return `${product.name}${product.color}${product.size}${product.amount}`
         }).join(' ')
 
-    const base = new Airtable({apiKey: process.env.AIRTABLE_SET_USER_INFO_PAT}).base(process.env.AIRTABLE_BASE).table(process.env.AIRTABLE_USER_INFO_TABLE)
-      
-    const createRecord = async (fields) => {
-      const createdRecord = await base.create(fields);
-    }
+    
 
     createRecord({
       'fields' : {
@@ -66,7 +68,17 @@ exports.handler = async function (event, context) {
           }),
         };
       }
-      if(result.includes(false) && data.status === 'paid' && data.currency === 'SAR') {
+      if(result.includes(false) && data.status === 'paid') {
+        createRecord({
+          'fields' : {
+            "name": fullName,
+            "phonenumber": Number(phoneNumber),
+            "status": "tampered",
+            "cart":shipCart,
+            "purchaseid":purchaseID
+          }
+          
+        })
         return {
           statusCode: 200,
           body: JSON.stringify({ 
@@ -74,6 +86,8 @@ exports.handler = async function (event, context) {
             message:'Cart Data Not Matching'
           }),
         }
+
+        
       }
        
       else{

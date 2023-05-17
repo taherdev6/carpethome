@@ -28,13 +28,11 @@ export const UserProvider = ({ children }) => {
     const auth = getAuth();
     auth.onAuthStateChanged((user) => {
       if(user) {
-        
       setMyUser(user)
       } else{
         setMyUser(null)
       }
     })
-    console.log(myUser)
    
 
 

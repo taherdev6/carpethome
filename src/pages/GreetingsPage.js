@@ -38,7 +38,7 @@ const Greetings = () => {
   };
   useEffect(() => {createPaymentIntent()}, [])
 
-  // useEffect(()=> {clearCart()},[paymentMessage])
+  useEffect(()=> {clearCart()},[paymentMessage])
   useEffect(() => {
     setTimeout(() => {
       navigate('/')
@@ -46,16 +46,16 @@ const Greetings = () => {
     }, 8000)
   }, [paymentMessage])
   if(!paymentMessage) {
-    return <p>Loading...</p>
+    return <p style={{textAlign:'center', lineHeight:'50px', fontWeight:'bold', marginTop:'5rem'}}>Loading...</p>
   }
   if(paymentMessage.includes('failed')) {
-    return <p>
+    return <p style={{textAlign:'center', lineHeight:'50px', fontWeight:'bold', marginTop:'5rem'}}>
       Sorry, Payment {paymentMessage} <br />
       Redirecting to Home Page...
     </p>
   }
   return (
-    <p>
+    <p style={{textAlign:'center', lineHeight:'50px', fontWeight:'bold', marginTop:'5rem'}}>
       Thanks For Shopping, Payment {paymentMessage}<br />
     Redirecting to Home Page...
     </p>

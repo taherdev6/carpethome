@@ -13,7 +13,7 @@ const CartButtons = () => {
   const { total_items, clearCart } = useCartContext();
   const { myUser, app } = useUserContext();
 
-  console.log(myUser)
+  
 
   return (
     <Wrapper className="cart-btn-wrapper">

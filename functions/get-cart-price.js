@@ -25,7 +25,7 @@ exports.handler = async (event, context, cb) => {
 
       return {
         statusCode: 200,
-        body: JSON.stringify(result),
+        body: JSON.stringify(result.reduce((acc, p) => acc + p, 0)),
       };
     } catch (error) {
 
