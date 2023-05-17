@@ -11,6 +11,6 @@ jobs:
         with:
           source-file: ".well-known/apple-developer-merchantid-domain-association"
           destination-path: "/.well-known/apple-developer-merchantid-domain-association"
-          site-name: justjogging.netlify.app
+          site-name: justjogging
           branch-name: main
           netlify-token: ${{ secrets.UPLOAD_FILE }}
