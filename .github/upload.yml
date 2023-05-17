@@ -1,0 +1,16 @@
+name: Upload
+
+on: push
+
+jobs:
+  upload:
+    name: Upload Apple association file.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MrFlynn/upload-to-netlify-action@v2.1.1
+        with:
+          source-file: ".well-known/apple-developer-merchantid-domain-association"
+          destination-path: "/.well-known/apple-developer-merchantid-domain-association"
+          site-name: justjogging.netlify.app
+          branch-name: main
+          netlify-token: ${{ secrets.UPLOAD_FILE }}
