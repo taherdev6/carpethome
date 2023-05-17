@@ -14,6 +14,8 @@
     "color-namer": "^1.4.0",
     "convert-css-color-name-to-hex": "^0.1.1",
     "dotenv": "^16.0.3",
+    "firebase": "^9.22.0",
+    "firebaseui": "^6.0.2",
     "hex-color-to-color-name": "^1.0.2",
     "moyasar": "^0.5.1",
     "react": "^18.2.0",

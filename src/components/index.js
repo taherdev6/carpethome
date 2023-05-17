@@ -18,6 +18,7 @@ import CartContent from './CartContent';
 import PageHero from './PageHero';
 import MoyasarCheckout from './MoyasarCheckout';
 import CreditCardForm from './CreditCardForm';
+import StyledFirebaseAuth from './StyledFirebaseAuth';
 export {
   FeaturedProducts,
   Navbar,
@@ -39,4 +40,5 @@ export {
   PageHero,
   MoyasarCheckout,
   CreditCardForm,
+  StyledFirebaseAuth
 };
