@@ -33,9 +33,11 @@ const Services = () => {
 };
 
 const Wrapper = styled.section`
-  h3,
+  h3{
+    color: var(--clr-primary-1)
+  }
   h4 {
-    color: var(--clr-primary-1);
+    color: var(--clr-primary-2);
   }
   padding: 5rem 0;
 

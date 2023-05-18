@@ -11,7 +11,6 @@ import CreditCardForm from './CreditCardForm';
 const CheckoutForm = () => {
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
   const { myUser, handlePending, paymentPending } = useUserContext();
-  console.log(myUser)
 const el = document.createElement('div')
 const moyasar = window.Moyasar;
 
@@ -26,7 +25,7 @@ const fetchPrice = async () => {
     amount: res,
     currency: 'SAR',
     description: `Clothing Order`,
-    publishable_api_key: process.env.MOYASAR_PUBLISHABLE_KEY,
+    publishable_api_key: process.env.REACT_APP_MOYASAR_PUBLISHABLE_KEY,
     callback_url: 'http://localhost:8888/greetings',
     on_initiating: () => {
       localStorage.setItem('pending', true)

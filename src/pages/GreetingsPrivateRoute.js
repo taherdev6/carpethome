@@ -4,7 +4,8 @@ import { useUserContext } from '../context/user_context';
 import { useLocation } from 'react-router-dom';
 const GreetingsPrivateRoute = ({ children, ...rest }) => {
     const location = useLocation();
-    const {paymentPending} = useUserContext();
+    const {myUser} = useUserContext();
+    
     if(location.pathname.includes('greetings') && !localStorage.getItem('pending')) return children
     if(!localStorage.getItem('pending')) {
         return <Navigate to="/" />
