@@ -1,22 +1,24 @@
-import React from 'react';
-import logo from '../assets/logo.svg';
-import { Link } from 'react-router-dom';
-import { useProductsContext } from '../context/products_context';
-import { FaTimes } from 'react-icons/fa';
-import { links } from '../utils/constants';
-import styled from 'styled-components';
-import CartButtons from './CartButtons';
-import { useUserContext } from '../context/user_context';
+import React from "react";
+import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
+import { useProductsContext } from "../context/products_context";
+import { FaTimes } from "react-icons/fa";
+import { links } from "../utils/constants";
+import styled from "styled-components";
+import CartButtons from "./CartButtons";
+import { useUserContext } from "../context/user_context";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useProductsContext();
 
   const { myUser } = useUserContext();
+  const { t } = useTranslation();
   return (
     <SidebarContainer>
-      <aside className={isSidebarOpen ? 'sidebar show-sidebar' : 'sidebar'}>
+      <aside className={isSidebarOpen ? "sidebar show-sidebar" : "sidebar"}>
         <div className="sidebar-header">
-          <img src={logo} alt="Comfy Sloth" />
+          <img src={logo} alt="Comfy Sloth" className="logo" />
           <button
             className="close-btn"
             type="button"
@@ -31,7 +33,7 @@ const Sidebar = () => {
             return (
               <li key={id}>
                 <Link to={url} onClick={() => closeSidebar()}>
-                  {text}
+                  {t(text)}
                 </Link>
               </li>
             );
@@ -39,7 +41,7 @@ const Sidebar = () => {
           {myUser && (
             <li>
               <Link to="/shipping" onClick={() => closeSidebar()}>
-                checkout
+                {t("checkout")}
               </Link>
             </li>
           )}
@@ -73,7 +75,7 @@ const SidebarContainer = styled.div`
   }
   .logo {
     justify-self: center;
-    height: 45px;
+    height: 40px;
   }
   .links {
     margin-bottom: 2rem;
@@ -102,7 +104,7 @@ const SidebarContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--clr-white);
+    background: var(--clr-primary-10);
     transition: var(--transition);
     transform: translate(-100%);
     z-index: -1;

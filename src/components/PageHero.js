@@ -1,14 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const PageHero = ({ title, product }) => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <div className="section-center">
         <h3>
-          <Link to="/">Home</Link>/{' '}
-          {product && <Link to={'/products'}>Products /</Link>}
-          {title}
+          <Link to="/">{t("home")}</Link>/{" "}
+          {product && <Link to={"/products"}>{t("products")} /</Link>}
+          {t(title)}
         </h3>
       </div>
     </Wrapper>

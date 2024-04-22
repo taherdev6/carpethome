@@ -1,0 +1,93 @@
+{
+  "welcome_to_react": "Welcome To React and react18-next",
+  "slide_text_1": "Gift your loved ones!",
+  "slide_text_2": "Best value for your money!",
+  "slide_text_3": "Checkout the newest in stock!",
+  "featured_products": "featured products",
+  "all_products": "all products",
+  "header_heading": "A variety of gifts to please your loved ones",
+  "header_text": "Gifts available for all ages and groups",
+  "service_heading_1": "mission",
+  "service_text_1": "Gaining the satisfaction and trust of our customers is our top priority",
+  "service_heading_2": "vision",
+  "service_text_2": "Providing high quality products",
+  "contact_heading": "Contact Us",
+  "contact_text": "For inquiries contact us at: ",
+  "footer": "All rights reserved",
+  "sort": "sort",
+  "sort_name_a-z": "Name (A-Z)",
+
+  "sort_name_z-a": "Name (Z-A)",
+
+  "sort_price_lowest": "Sort (Lowest)",
+
+  "sort_price_highest": "Sort (Highest)",
+
+  "products_found": "Products Found",
+
+  "price": "price",
+
+  "clear_filters": "Clear Filters",
+
+  "search": "search",
+
+  "back_to_products": "BACK TO PRODUCTS",
+
+  "available": "Available",
+
+  "in_stock": "In Stock",
+
+  "out_of_stock": "Out Of Stock",
+
+  "colors": "Colors",
+
+  "add_to_cart": "ADD TO CART",
+
+  "remove_from_cart": "REMOVE FROM CART",
+
+  "color": "Color",
+
+  "continue_shopping": "Continue Shopping",
+
+  "clear_shopping_cart": "Clear Shopping Cart",
+
+  "subtotal": "Subtotal",
+
+  "shipping_fee": "Shipping Fee",
+
+  "order_total": "Order Total",
+
+  "proceed_to_checkout": "PROCEED TO CHECKOUT",
+
+  "cart_empty": "Your Cart Is Empty",
+
+  "fill_it": "FILL IT!",
+
+  "quantity": "Quantity",
+
+  "full_name": "Full Name",
+
+  "phone_number": "Phone Number",
+
+  "edit_info": "Edit Info",
+
+  "proceed_to_payment": "Proceed To Payment",
+
+  "save": "Save",
+
+  "hello": "Hello",
+
+  "your_total_is": "Your Total Is, ",
+
+  "payment_successful": "Thanks For Shopping, Redirecting To Homepage...",
+
+  "payment_failed": "Sorry, Redirecting To Homepage...",
+
+  "payment": "Payment",
+
+  "loading": "Loading...",
+
+  "successful": "successful!",
+
+  "carpet": "Carpet"
+}

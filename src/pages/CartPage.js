@@ -1,19 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useCartContext } from '../context/cart_context';
-import { Link } from 'react-router-dom';
-import { CartContent, PageHero } from '../components';
+import React from "react";
+import styled from "styled-components";
+import { useCartContext } from "../context/cart_context";
+import { Link } from "react-router-dom";
+import { CartContent, PageHero } from "../components";
+import { useTranslation } from "react-i18next";
 
 const CartPage = () => {
-  if(localStorage.getItem('pending')) localStorage.removeItem('pending') 
+  const { t } = useTranslation();
+  if (localStorage.getItem("pending")) localStorage.removeItem("pending");
   const { cart } = useCartContext();
   if (cart.length === 0) {
     return (
       <Wrapper className="page-100">
         <div className="empty">
-          <h2>Your cart is empty</h2>
+          <h2>{t("cart_empty")}</h2>
           <Link to="/products" className="btn">
-            fill it
+            {t("fill_it")}
           </Link>
         </div>
       </Wrapper>

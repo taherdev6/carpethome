@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -7,7 +9,8 @@ import {
   GET_SINGLE_PRODUCT_BEGIN,
   GET_SINGLE_PRODUCT_SUCCESS,
   GET_SINGLE_PRODUCT_ERROR,
-} from '../actions';
+  CHANGE_LNG,
+} from "../actions";
 
 const products_reducer = (state, action) => {
   if (action.type === SIDEBAR_OPEN) {
@@ -21,7 +24,7 @@ const products_reducer = (state, action) => {
   }
   if (action.type === GET_PRODUCTS_SUCCESS) {
     const featured_products = action.payload.filter((product) => {
-      return product.hasOwnProperty('featured');
+      return product.hasOwnProperty("featured");
     });
     return {
       ...state,
@@ -53,6 +56,19 @@ const products_reducer = (state, action) => {
       ...state,
       single_product_loading: false,
       single_product_error: true,
+    };
+  }
+
+  if (action.type === CHANGE_LNG) {
+    i18next.changeLanguage(action.payload);
+    document.querySelector("html").lang = action.payload;
+    if (action.payload === "ar") {
+      document.querySelector("html").dir = "rtl";
+    } else {
+      document.querySelector("html").dir = "ltr";
+    }
+    return {
+      ...state,
     };
   }
   return state;

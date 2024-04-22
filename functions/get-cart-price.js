@@ -19,7 +19,7 @@ exports.handler = async (event, context, cb) => {
               dBProduct = {...dBProduct.fields};
               return dBProduct.price
       
-            } )
+            })
           )
 
 

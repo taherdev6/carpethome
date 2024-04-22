@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { FaCheck } from 'react-icons/fa';
-import { useCartContext } from '../context/cart_context';
-import AmountButtons from './AmountButtons';
-import ColorNamer from 'color-namer';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FaCheck } from "react-icons/fa";
+import { useCartContext } from "../context/cart_context";
+import AmountButtons from "./AmountButtons";
+import ColorNamer from "color-namer";
+import { useTranslation } from "react-i18next";
 const AddToCart = ({
   product,
   setMainColor,
@@ -17,18 +18,19 @@ const AddToCart = ({
   setChangeState,
   changeState,
 }) => {
+  const { t } = useTranslation();
   const { addToCart } = useCartContext();
   const { id, stock, colors, size: sizes } = product;
   const [amount, setAmount] = useState(1);
-  const [colorHex, setColorHex] = useState('');
+  const [colorHex, setColorHex] = useState("");
   useEffect(() => {
     if (multicolor) {
       const multiColorName = multicolor[0]
-        .split(' ')
+        .split(" ")
         .map((color) =>
-          ColorNamer(color).ntc[0].name.toLowerCase().replaceAll(' ', '')
+          ColorNamer(color).ntc[0].name.toLowerCase().replaceAll(" ", "")
         )
-        .join('and');
+        .join("and");
       setMainColor(multiColorName);
 
       setSize(sizes[0]);
@@ -37,7 +39,7 @@ const AddToCart = ({
       return;
     }
     setMainColor(
-      ColorNamer(colors[0]).ntc[0].name.toLowerCase().replaceAll(' ', '')
+      ColorNamer(colors[0]).ntc[0].name.toLowerCase().replaceAll(" ", "")
     );
     setSize(sizes[0]);
     setColors(colors);
@@ -45,7 +47,7 @@ const AddToCart = ({
   }, []);
 
   useEffect(() => {
-    if (changeState.includes(' ')) {
+    if (changeState.includes(" ")) {
       if (amount > product[`${colorDisplay}${size}stock`])
         setAmount(product[`${colorDisplay}${size}stock`]);
       return;
@@ -70,12 +72,12 @@ const AddToCart = ({
   return (
     <Wrapper>
       <div className="colors">
-        <span>colors: </span>
+        <span>{t("colors")}: </span>
         <div>
           {colors.map((color, i) => {
             const colorName = ColorNamer(color)
               .ntc[0].name.toLowerCase()
-              .replaceAll(' ', '');
+              .replaceAll(" ", "");
             if (
               product[`${colorName}smallstock`] === 0 &&
               product[`${colorName}largestock`] === 0
@@ -85,7 +87,7 @@ const AddToCart = ({
             return (
               <button
                 key={i}
-                className={`color-btn ${colorName === mainColor && 'active'}`}
+                className={`color-btn ${colorName === mainColor && "active"}`}
                 style={{ backgroundColor: color }}
                 onClick={() => {
                   setMainColor(colorName);
@@ -93,7 +95,7 @@ const AddToCart = ({
                   setColorHex(color);
                 }}
               >
-                {colorName === mainColor ? <FaCheck /> : ''}
+                {colorName === mainColor ? <FaCheck /> : ""}
               </button>
             );
           })}
@@ -103,7 +105,7 @@ const AddToCart = ({
                 <button
                   name="color"
                   className={`multi-color-btn ${
-                    colors === mainColor ? 'active-multi' : ''
+                    colors === mainColor ? "active-multi" : ""
                   }`}
                   key={i}
                   onClick={() => {
@@ -112,7 +114,7 @@ const AddToCart = ({
                     setColorHex(colors);
                   }}
                 >
-                  {colors.split(' ').map((color, i) => {
+                  {colors.split(" ").map((color, i) => {
                     return (
                       <a
                         key={i}
@@ -141,16 +143,16 @@ const AddToCart = ({
           to="/cart"
           className="btn"
           onClick={() => {
-            if(amount === 0) return
-            if (mainColor.includes(' ')) {
+            if (amount === 0) return;
+            if (mainColor.includes(" ")) {
               const multiColorName = mainColor
-                .split(' ')
+                .split(" ")
                 .map((color) =>
                   ColorNamer(color)
                     .ntc[0].name.toLowerCase()
-                    .replaceAll(' ', '')
+                    .replaceAll(" ", "")
                 )
-                .join('and');
+                .join("and");
 
               addToCart(id, multiColorName, colorHex, amount, product, size);
               return;
@@ -158,7 +160,7 @@ const AddToCart = ({
             addToCart(id, mainColor, colorHex, amount, product, size);
           }}
         >
-          add to cart
+          {t("add_to_cart")}
         </Link>
       </div>
     </Wrapper>

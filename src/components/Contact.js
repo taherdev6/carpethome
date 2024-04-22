@@ -1,14 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
 const Contact = () => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <div className="section-center">
-        <h3>Contact Us</h3>
+        <h3>{t("contact_heading")}</h3>
         <div className="content">
           <p>
-            For any inquiries or refund requests contact us at:
+            {t("contact_text")}
             <span>05555555555</span>
           </p>
           {/* Form Spree Email Form */}

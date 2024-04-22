@@ -1,10 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { formatPrice } from '../utils/helpers';
-import { FaSearch } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { formatPrice } from "../utils/helpers";
+import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Product = ({ image, name, price, id }) => {
+  const { t } = useTranslation();
+  const nameArr = name.split(" ");
+  const productName = nameArr[0];
+  const productNumber = nameArr[1];
   return (
     <Wrapper>
       <div className="container">
@@ -14,7 +19,9 @@ const Product = ({ image, name, price, id }) => {
         </Link>
       </div>
       <footer>
-        <h5>{name}</h5>
+        <h5>
+          {t(productName)} {productNumber}
+        </h5>
         <p>{formatPrice(price)}</p>
       </footer>
     </Wrapper>
@@ -30,7 +37,7 @@ const Wrapper = styled.article`
   img {
     width: 100%;
     display: block;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: var(--radius);
     transition: var(--transition);
   }

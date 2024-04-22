@@ -1,14 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
 const CartColumns = () => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <div className="content">
-        <h5>item</h5>
-        <h5>Price</h5>
-        <h5>Quantity</h5>
-        <h5>Subtotal</h5>
+        <h5>{t("item")}</h5>
+        <h5>{t("price")}</h5>
+        <h5>{t("quantity")}</h5>
+        <h5>{t("subtotal")}</h5>
         <span></span>
       </div>
       <hr />

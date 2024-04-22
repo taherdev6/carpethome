@@ -1,12 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useCartContext } from '../context/cart_context';
-import { Link } from 'react-router-dom';
-import CartColumns from './CartColumns';
-import CartItem from './CartItem';
-import CartTotals from './CartTotals';
+import React from "react";
+import styled from "styled-components";
+import { useCartContext } from "../context/cart_context";
+import { Link } from "react-router-dom";
+import CartColumns from "./CartColumns";
+import CartItem from "./CartItem";
+import CartTotals from "./CartTotals";
+import { useTranslation } from "react-i18next";
 
 const CartContent = () => {
+  const { t } = useTranslation();
   const { cart, clearCart } = useCartContext();
 
   return (
@@ -18,14 +20,14 @@ const CartContent = () => {
       <hr />
       <div className="link-container">
         <Link to="/products" className="link-btn">
-          continue shopping
+          {t("continue_shopping")}
         </Link>
         <button
           type="button"
           className="link-btn clear-btn"
           onClick={clearCart}
         >
-          clear shopping cart
+          {t("clear_shopping_cart")}
         </button>
       </div>
       <CartTotals />

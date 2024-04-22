@@ -1,69 +1,115 @@
-import React from 'react'
-import { useState } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-const ShippingPage = () => {
-  if(localStorage.getItem('pending')) localStorage.removeItem('pending') 
-    const [fullName, setFullName] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState(null);
-    const [render, setRender] = useState(false)
+import React from "react";
+import { useState } from "react";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      const fullName = e.target.elements['full-name'].value
-      const phoneNumber = Number(e.target.elements['phone-number'].value)
-      
-      setFullName(fullName)
-      setPhoneNumber(phoneNumber)
-      localStorage.setItem('shipping', JSON.stringify({fullName, phoneNumber}))
-    }
-    if(localStorage.getItem('shipping')) {
-      const shipping = JSON.parse(localStorage.getItem('shipping'))
-      const {fullName} = shipping;
-      const {phoneNumber} = shipping
-      return <Wrapper>
-        <div>
-        <h4>FullName: {fullName}</h4>
-        <h4>Phone Number: {phoneNumber}</h4>
-        <button 
-        className='edit-btn'
-        // style={{marginLeft:'100px'}}
-        onClick={
-        () => {
-          localStorage.removeItem('shipping')
-        setRender(true)
-        }
-        
-      }
-      style={{margin:'50px'}}
-      >Edit Info</button>
-      <Link to='/checkout' className='link'>Proceed to Payment</Link>
-      </div>
+const ShippingPage = () => {
+  if (localStorage.getItem("pending")) localStorage.removeItem("pending");
+  const { t } = useTranslation();
+  const lang = i18next.language;
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [render, setRender] = useState(false);
+
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    const fullName = e.target.elements["full-name"].value;
+    const phoneNumber = Number(e.target.elements["phone-number"].value);
+
+    setFullName(fullName);
+    setPhoneNumber(phoneNumber);
+    localStorage.setItem("shipping", JSON.stringify({ fullName, phoneNumber }));
+  };
+  if (localStorage.getItem("shipping")) {
+    const shipping = JSON.parse(localStorage.getItem("shipping"));
+    const { fullName } = shipping;
+    const { phoneNumber } = shipping;
+    return (
+      <Wrapper>
+        <InfoContainer lang={lang}>
+          <h4>
+            {t("full_name")}: {fullName}
+          </h4>
+          <h4>
+            {t("phone_number")}: {phoneNumber}
+          </h4>
+          <button
+            className="edit-btn"
+            // style={{marginLeft:'100px'}}
+            onClick={() => {
+              localStorage.removeItem("shipping");
+              setRender(!render);
+            }}
+            // style={{ margin: "50px" }}
+          >
+            {t("edit_info")}
+          </button>
+          <Link to="/checkout" className="link">
+            {t("proceed_to_payment")}
+          </Link>
+        </InfoContainer>
       </Wrapper>
-      
-    }
+    );
+  }
   return (
     <Wrapper>
-    <form className='shipping-form' onSubmit={handleSubmit}
-    style={{margin:'50px'}}
-    >
-        <label htmlFor="full-name">Full Name:</label>
-        <input type="text" name='full-name' required/>
+      <form
+        className="shipping-form"
+        onSubmit={handleSubmit}
+        style={{ margin: "50px" }}
+      >
+        <label htmlFor="full-name">{t("full_name")}:</label>
+        <input type="text" name="full-name" required />
 
-        <label htmlFor="phone-number" >Whatsapp Phone Number:</label>
-        <input type="number" name='phone-number' required/>
-        <button type='submit'>
-          Save
-        </button>
-        
-    </form>
+        <label htmlFor="phone-number">{t("phone_number")}:</label>
+        <input type="number" name="phone-number" required />
+        <button type="submit">{t("save")}</button>
+      </form>
     </Wrapper>
-  )
-}
+  );
+};
+
+const InfoContainer = styled.div`
+  align-self: center;
+  width: 50vw;
+  /* margin-left: 10rem; */
+  margin: 0 auto;
+
+  ${({ lang }) => {
+    if (lang === "ar") {
+      return css`
+        margin: 0 auto;
+      `;
+    }
+  }}
+  /* align-self: center; */
+  /* box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+      0px 2px 5px 0px rgba(50, 50, 93, 0.1),
+      0px 1px 1.5px 0px rgba(0, 0, 0, 0.07); */
+  /* border-radius: 7px; */
+  padding: 40px;
+
+  .edit-btn {
+    ${({ lang }) => {
+      if (lang === "ar") {
+        return css`
+          margin: 50px 0 50px 50px;
+        `;
+      } else {
+        return css`
+          margin: 50px;
+        `;
+      }
+    }}
+  }
+`;
 
 const Wrapper = styled.section`
+  display: flex;
+  justify-content: center;
   form {
-    
     width: 50vw;
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
       0px 2px 5px 0px rgba(50, 50, 93, 0.1),
@@ -82,19 +128,18 @@ const Wrapper = styled.section`
     background: white;
     box-sizing: border-box;
   }
-  div {
+  /* div {
     align-self: center;
     width: 50vw;
     margin-left: 10rem;
-    /* align-self: center; */
-    /* box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+    align-self: center;
+    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
       0px 2px 5px 0px rgba(50, 50, 93, 0.1),
-      0px 1px 1.5px 0px rgba(0, 0, 0, 0.07); */
-    /* border-radius: 7px; */
+      0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+    border-radius: 7px;
     padding: 40px;
-  }
+  } */
 
-  
   .result-message {
     line-height: 22px;
     font-size: 16px;
@@ -107,6 +152,7 @@ const Wrapper = styled.section`
   .hidden {
     display: none;
   }
+
   #card-error {
     color: rgb(105, 115, 134);
     font-size: 16px;
@@ -142,6 +188,7 @@ const Wrapper = styled.section`
     box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
     width: 100%;
   }
+
   button:hover {
     filter: contrast(115%);
   }
@@ -149,7 +196,7 @@ const Wrapper = styled.section`
     opacity: 0.5;
     cursor: default;
   }
-  h4{
+  h4 {
     margin-left: 50px;
   }
   .link {
@@ -198,7 +245,7 @@ const Wrapper = styled.section`
   .spinner:before,
   .spinner:after {
     position: absolute;
-    content: '';
+    content: "";
   }
   .spinner:before {
     width: 10.4px;
@@ -241,4 +288,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default ShippingPage
+export default ShippingPage;

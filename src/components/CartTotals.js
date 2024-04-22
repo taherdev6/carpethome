@@ -1,11 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useCartContext } from '../context/cart_context';
-import { useUserContext } from '../context/user_context';
-import { formatPrice } from '../utils/helpers';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { useCartContext } from "../context/cart_context";
+import { useUserContext } from "../context/user_context";
+import { formatPrice } from "../utils/helpers";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CartTotals = () => {
+  const { t } = useTranslation();
   const { total_amount, shipping_fee } = useCartContext();
   const { myUser } = useUserContext();
   return (
@@ -13,24 +15,24 @@ const CartTotals = () => {
       <div>
         <article>
           <h5>
-            subtotal : <span>{formatPrice(total_amount)}</span>
+            {t("subtotal")} : <span>{formatPrice(total_amount)}</span>
           </h5>
           <p>
-            shipping fee : <span>{formatPrice(shipping_fee)}</span>
+            {t("shipping_fee")} : <span>{formatPrice(shipping_fee)}</span>
           </p>
           <hr />
           <h4>
-            order total :{' '}
+            {t("order_total")} :{" "}
             <span>{formatPrice(total_amount + shipping_fee)}</span>
           </h4>
         </article>
         {myUser ? (
           <Link to="/shipping" className="btn">
-            proceed to checkout
+            {t("proceed_to_checkout")}
           </Link>
         ) : (
-          <Link type="button" className="btn" to='/login'>
-            login
+          <Link type="button" className="btn" to="/login">
+            {t("login")}
           </Link>
         )}
       </div>

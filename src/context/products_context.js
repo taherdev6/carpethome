@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
-import reducer from '../reducers/products_reducer';
-import { products_url as url } from '../utils/constants';
+import axios from "axios";
+import React, { useContext, useEffect, useReducer } from "react";
+import reducer from "../reducers/products_reducer";
+import { products_url as url } from "../utils/constants";
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -11,8 +11,9 @@ import {
   GET_SINGLE_PRODUCT_BEGIN,
   GET_SINGLE_PRODUCT_SUCCESS,
   GET_SINGLE_PRODUCT_ERROR,
-} from '../actions';
-import { type } from '@testing-library/user-event/dist/type';
+  CHANGE_LNG,
+} from "../actions";
+import { type } from "@testing-library/user-event/dist/type";
 
 const initialState = {
   isSidebarOpen: false,
@@ -21,54 +22,54 @@ const initialState = {
   products: [],
   featured_products: [],
   single_product: {
-    name: '',
-    price: '',
-    stock: '',
-    stars: '',
-    description: '',
-    reviews: '',
-    id: '',
-    fabric: '',
-    images: '',
+    name: "",
+    price: "",
+    stock: "",
+    stars: "",
+    description: "",
+    reviews: "",
+    id: "",
+    fabric: "",
+    images: "",
     multicolor: [],
-    pinksmallstock: '',
-    pinklargestock: '',
+    pinksmallstock: "",
+    pinklargestock: "",
 
-    whitesmallstock: '',
-    whitelargestock: '',
+    whitesmallstock: "",
+    whitelargestock: "",
 
-    brandypunchsmallstock: '',
-    brandypunchlargestock: '',
+    brandypunchsmallstock: "",
+    brandypunchlargestock: "",
 
-    graysmallstock: '',
-    graylargestock: '',
+    graysmallstock: "",
+    graylargestock: "",
 
-    brownsmallstock: '',
-    brownlargestock: '',
+    brownsmallstock: "",
+    brownlargestock: "",
 
-    creamsmallstock: '',
-    creamlargestock: '',
+    creamsmallstock: "",
+    creamlargestock: "",
 
-    bluesmallstock: '',
-    bluelargestock: '',
+    bluesmallstock: "",
+    bluelargestock: "",
 
-    greensmallstock: '',
-    greenlargestock: '',
+    greensmallstock: "",
+    greenlargestock: "",
 
-    blacksmallstock: '',
-    blacklargestock: '',
+    blacksmallstock: "",
+    blacklargestock: "",
 
-    bondibluesmallstock: '',
-    bondibluelargestock: '',
+    bondibluesmallstock: "",
+    bondibluelargestock: "",
 
-    greenandbrandypunchsmallstock: '',
-    greenandbrandypunchlargestock: '',
+    greenandbrandypunchsmallstock: "",
+    greenandbrandypunchlargestock: "",
 
-    grayandbluesmallstock: '',
-    grayandbluelargestock: '',
+    grayandbluesmallstock: "",
+    grayandbluelargestock: "",
 
-    blueandbrandypunchsmallstock: '',
-    blueandbrandypunchlargestock: '',
+    blueandbrandypunchsmallstock: "",
+    blueandbrandypunchlargestock: "",
   },
   single_product_loading: false,
   single_product_error: false,
@@ -87,17 +88,21 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: SIDEBAR_CLOSE });
   };
 
+  const changeLng = (lng) => {
+    dispatch({ type: CHANGE_LNG, payload: lng });
+  };
+
   const fetchProducts = async (url) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });
     try {
-      
       const data = await axios.get(url);
+
       if (data.status === 200) {
         const res = data.data;
 
         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: res });
       } else {
-        throw new Error('Error!');
+        throw new Error("Error!");
       }
     } catch (error) {
       dispatch({ type: GET_PRODUCTS_ERROR });
@@ -111,7 +116,7 @@ export const ProductsProvider = ({ children }) => {
       const res = await axios.get(url);
       const singleProduct = res.data;
       if (!res.status) {
-        throw new Error('Error: Could Not Fetch Product');
+        throw new Error("Error: Could Not Fetch Product");
       }
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
     } catch (error) {
@@ -125,7 +130,13 @@ export const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider
-      value={{ ...state, openSidebar, closeSidebar, fetchSingleProduct }}
+      value={{
+        ...state,
+        openSidebar,
+        closeSidebar,
+        changeLng,
+        fetchSingleProduct,
+      }}
     >
       {children}
     </ProductsContext.Provider>

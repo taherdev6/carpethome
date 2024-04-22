@@ -1,9 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { formatPrice } from '../utils/helpers';
-import AmountButtons from './AmountButtons';
-import { FaTrash } from 'react-icons/fa';
-import { useCartContext } from '../context/cart_context';
+import React from "react";
+import styled from "styled-components";
+import { formatPrice } from "../utils/helpers";
+import AmountButtons from "./AmountButtons";
+import { FaTrash } from "react-icons/fa";
+import { useCartContext } from "../context/cart_context";
+import { useTranslation } from "react-i18next";
 const CartItem = ({
   id,
   image,
@@ -14,26 +15,33 @@ const CartItem = ({
   amount,
   size,
 }) => {
+  const { t } = useTranslation();
   const { removeItem, toggleAmount } = useCartContext();
 
+  const nameArr = name.split(" ");
+  const productName = t(nameArr[0]);
+  const productNumber = nameArr[1];
+
   const increase = () => {
-    toggleAmount(id, 'increase');
+    toggleAmount(id, "increase");
   };
 
   const decrease = () => {
-    toggleAmount(id, 'decrease');
+    toggleAmount(id, "decrease");
   };
   return (
     <Wrapper>
       <div className="title">
         <img src={image} alt={name} />
         <div>
-          <h5 className="name">{name}</h5>
+          <h5 className="name">
+            {productName} {productNumber}
+          </h5>
           <div className="color">
-            color :{' '}
-            {colorHex.includes(' ') ? (
+            {t("color")} :{" "}
+            {colorHex.includes(" ") ? (
               <div>
-                {colorHex.split(' ').map((color, i) => {
+                {colorHex.split(" ").map((color, i) => {
                   return <span key={i} style={{ background: color }}></span>;
                 })}
               </div>

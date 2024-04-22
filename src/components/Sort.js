@@ -1,8 +1,10 @@
-import React from 'react';
-import { useFilterContext } from '../context/filter_context';
-import { BsFillGridFill, BsList } from 'react-icons/bs';
-import styled from 'styled-components';
+import React from "react";
+import { useFilterContext } from "../context/filter_context";
+import { BsFillGridFill, BsList } from "react-icons/bs";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 const Sort = () => {
+  const { t } = useTranslation();
   const {
     filtered_products: products,
     grid_view,
@@ -16,23 +18,25 @@ const Sort = () => {
       <div className="btn-container">
         <button
           type="button"
-          className={grid_view ? 'active' : null}
+          className={grid_view ? "active" : null}
           onClick={() => setGridView()}
         >
           <BsFillGridFill />
         </button>
         <button
           type="button"
-          className={!grid_view ? 'active' : null}
+          className={!grid_view ? "active" : null}
           onClick={() => setListView()}
         >
           <BsList />
         </button>
       </div>
-      <p>{products.length} products found</p>
+      <p>
+        {products.length} {t("products_found")}
+      </p>
       <hr />
       <form>
-        <label htmlFor="sort">sort by</label>
+        <label htmlFor="sort">{t("sort")}</label>
         <select
           name="sort"
           id="sort"
@@ -40,10 +44,10 @@ const Sort = () => {
           value={sort}
           onChange={(e) => updateSort(e)}
         >
-          <option value="price-lowest">price (lowest)</option>
-          <option value="price-highest">price (highest)</option>
-          <option value="name-a">name (a-z)</option>
-          <option value="name-z">name (z-a)</option>
+          <option value="price-lowest">{t("sort_price_lowest")}</option>
+          <option value="price-highest">{t("sort_price_highest")}</option>
+          <option value="name-a">{t("sort_name_a-z")}</option>
+          <option value="name-z">{t("sort_name_z-a")}</option>
         </select>
       </form>
     </Wrapper>

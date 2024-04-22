@@ -1,0 +1,101 @@
+{
+  "welcome_to_react": "مرحبا الى الموقع",
+  "home": "الرئيسية",
+  "products": "المنتجات",
+  "checkout": "الدفع",
+  "cart": "السلة",
+  "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
+  "slide_text_1": "اهدي كل من تحب!",
+  "slide_text_2": "سعر مميز!",
+  "slide_text_3": "اكتشف احدث المنتجات!",
+  "featured_products": "المنتجات المعروضة",
+  "all_products": "صفحة المنتجات",
+  "header_heading": "هداية من انواع مختلفة لتسعد من تحب",
+  "header_text": "هداية متوفرة لجميع الاعمار والفئات",
+  "service_heading_1": "المهمة",
+  "service_text_1": "الحيز على رضا العملاء واكتساب ثقتهم في منتجاتنا",
+  "service_heading_2": "الرؤية",
+  "service_text_2": "توفير منتجات ذات جوده عالية",
+  "contact_heading": "تواصل معنا",
+  "contact_text": "للأستفسارات تواصل معنا على هذا الرقم: ",
+  "footer": "جميع الحقوق محفوظة",
+  "sort": "ترتيب",
+  "sort_name_a-z": "الاسم (أ-ي)",
+
+  "sort_name_z-a": "الاسم (ي-أ)",
+
+  "sort_price_lowest": "السعر (ادنى الى اعلى)",
+
+  "sort_price_highest": "السعر (اعلى الى ادنى)",
+
+  "products_found": "منتجات وجدت",
+
+  "price": "السعر",
+
+  "clear_filters": "ازالة التصفية",
+
+  "search": "البحث",
+
+  "back_to_products": "العودة الى المنتجات",
+
+  "available": "التوفر",
+
+  "in_stock": "متوفر",
+
+  "out_of_stock": "غير متوفر",
+
+  "colors": "الالوان المتوفرة",
+
+  "add_to_cart": "اضافة الى العربة",
+
+  "remove_from_cart": "الازالة من العربة",
+
+  "color": "اللون",
+
+  "continue_shopping": "تصفح المنتجات",
+
+  "clear_shopping_cart": "ازالة منتجات العربة",
+
+  "subtotal": "المجموع الفرعي",
+
+  "shipping_fee": "رسوم الشحن",
+
+  "order_total": "الحساب النهائي",
+
+  "proceed_to_checkout": "الاستمرار الى الدفع",
+
+  "cart_empty": "العربة خالية",
+
+  "fill_it": "املأها!",
+
+  "item": "المنتج",
+
+  "quantity": "الكمية",
+
+  "full_name": "الاسم الكامل",
+
+  "phone_number": "رقم الجوال",
+
+  "edit_info": "تعديل المعلومات الشخصية",
+
+  "proceed_to_payment": "المتابعة الى الدفع",
+
+  "save": "حفظ",
+
+  "hello": "اهلا",
+
+  "your_total_is": "حسابك, ",
+
+  "payment_successful": "شكرا لتسوقكم, جاري العودة للصفحة الرئيسية...",
+
+  "payment_failed": "نأسف لم يكتمل الاجراء, جاري العودة للصفحة الرئيسية...",
+
+  "payment": "الاجراء",
+
+  "loading": "جاري الانتظار...",
+
+  "successful": "ناجح!",
+
+  "carpet": "سجاد"
+}

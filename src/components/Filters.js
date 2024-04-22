@@ -1,12 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useFilterContext } from '../context/filter_context';
-import { getUniqueValues, formatPrice } from '../utils/helpers';
-import { FaCheck } from 'react-icons/fa';
-import { FaPlus } from 'react-icons/fa';
-import ColorNamer from 'color-namer';
+import React from "react";
+import styled from "styled-components";
+import { useFilterContext } from "../context/filter_context";
+import { getUniqueValues, formatPrice } from "../utils/helpers";
+import { FaCheck } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import ColorNamer from "color-namer";
+import { useTranslation } from "react-i18next";
 
 const Filters = () => {
+  const { t } = useTranslation();
   const {
     filters: {
       text,
@@ -26,11 +28,11 @@ const Filters = () => {
   const products = [...all_products];
 
   // const categories = getUniqueValues(all_products, 'category');
-  const fabrics = getUniqueValues(all_products, 'fabric');
-  const colors = getUniqueValues(all_products, 'colors');
+  const fabrics = getUniqueValues(all_products, "fabric");
+  const colors = getUniqueValues(all_products, "colors");
 
   const productsMultiColor = products.filter((product) =>
-    product.hasOwnProperty('multicolor')
+    product.hasOwnProperty("multicolor")
   );
   return (
     <Wrapper>
@@ -41,7 +43,7 @@ const Filters = () => {
             <input
               type="text"
               name="text"
-              placeholder="search"
+              placeholder={t("search")}
               className="search-input"
               value={text}
               onChange={updateFilters}
@@ -102,7 +104,7 @@ const Filters = () => {
           <div className="form-control">
             <div className="colors">
               {colors.map((c, i) => {
-                if (c === 'all')
+                if (c === "all")
                   return (
                     <button
                       key={i}
@@ -110,12 +112,12 @@ const Filters = () => {
                       onClick={updateFilters}
                       data-color="all"
                       className={`${
-                        color === 'all' ? 'all-btn active' : 'all-btn'
+                        color === "all" ? "all-btn active" : "all-btn"
                       }`}
                       style={{
-                        backgroundColor: '#696969',
+                        backgroundColor: "#696969",
                         // backgroundColor: 'rgba(0, 0, 0, 0.28)',
-                        color: '#fff',
+                        color: "#fff",
                       }}
                     >
                       all
@@ -128,7 +130,7 @@ const Filters = () => {
                     name="color"
                     style={{ background: c }}
                     className={`${
-                      color === c ? 'color-btn active' : 'color-btn'
+                      color === c ? "color-btn active" : "color-btn"
                     }`}
                     data-color={c}
                     onClick={updateFilters}
@@ -144,13 +146,13 @@ const Filters = () => {
                     <button
                       name="color"
                       className={`multi-color-btn ${
-                        multicolor === color ? 'active-multi' : ''
+                        multicolor === color ? "active-multi" : ""
                       }`}
                       key={i}
                       data-color={multicolor}
                       onClick={updateFilters}
                     >
-                      {multicolor.split(' ').map((color, i) => {
+                      {multicolor.split(" ").map((color, i) => {
                         return (
                           <a
                             key={i}
@@ -189,7 +191,7 @@ const Filters = () => {
           } */}
 
           <div className="form-control">
-            <h5>price</h5>
+            <h5>{t("price")}</h5>
             <p className="price">{formatPrice(price)}</p>
             <input
               type="range"
@@ -221,7 +223,7 @@ const Filters = () => {
         </form>
 
         <button type="button" className="clear-btn" onClick={clearFilters}>
-          clear filters
+          {t("clear_filters")}
         </button>
       </div>
     </Wrapper>

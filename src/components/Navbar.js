@@ -1,16 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import logo from '../assets/logo.svg';
-import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { links } from '../utils/constants';
-import CartButtons from './CartButtons';
-import { useProductsContext } from '../context/products_context';
-import { useUserContext } from '../context/user_context';
-
+import React from "react";
+import styled from "styled-components";
+import logo from "../assets/logo.svg";
+import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { links } from "../utils/constants";
+import CartButtons from "./CartButtons";
+import { useProductsContext } from "../context/products_context";
+import { useUserContext } from "../context/user_context";
+import { useTranslation } from "react-i18next";
 const Nav = () => {
   const { openSidebar } = useProductsContext();
   const { myUser } = useUserContext();
+  const { t } = useTranslation();
   return (
     <NavContainer>
       <div className="nav-center">
@@ -31,13 +32,13 @@ const Nav = () => {
             const { id, text, url } = link;
             return (
               <li key={id}>
-                <Link to={url}>{text}</Link>
+                <Link to={url}>{t(text)}</Link>
               </li>
             );
           })}
           {myUser && (
             <li>
-              <Link to="/shipping">checkout</Link>
+              <Link to="/shipping">{t("checkout")}</Link>
             </li>
           )}
         </ul>
@@ -52,6 +53,8 @@ const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--clr-primary-10);
+  padding: 50px 0;
 
   .nav-center {
     width: 90vw;

@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import {
   LOAD_PRODUCTS,
   SET_LISTVIEW,
@@ -7,29 +8,15 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
-} from '../actions';
+} from "../actions";
 
-import ColorNamer from 'color-namer';
+import ColorNamer from "color-namer";
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
     const prices = action.payload.map((product) => product.price);
     const maxPrice = Math.max(...prices);
     let tempProducts = [...action.payload];
-    // tempProducts = tempProducts.map((product) => {
 
-    //   product.colors.map((color) => {
-    //     const tempColor = ColorNamer(color)
-    //       .ntc[0].name.toLowerCase()
-    //       .replaceAll(' ', '');
-    //     if (product[`${tempColor}largestock`] === 0) {
-    //       delete product[`${tempColor}largestock`];
-    //     }
-    //     if (product[`${tempColor}smallstock`] === 0) {
-    //       delete product[`${tempColor}smallstock`];
-    //     }
-    //   });
-    //   return product;
-    // });
     return {
       ...state,
       all_products: [...tempProducts],
@@ -61,19 +48,27 @@ const filter_reducer = (state, action) => {
   if (action.type === SORT_PRODUCTS) {
     const { sort, filtered_products } = state;
     const products = [...filtered_products];
-    if (sort === 'name-a') {
-      return { ...state, filtered_products: products.toSorted() };
+    // const productNames = products.map((product) => product.name);
+    const lang = i18next.language;
+    if (sort === "name-a") {
+      const sortedProducts = products.toSorted((a, b) => {
+        return a.name.localeCompare(b.name, lang);
+      });
+      return { ...state, filtered_products: sortedProducts };
     }
-    if (sort === 'name-z') {
-      return { ...state, filtered_products: products.toSorted().toReversed() };
+    if (sort === "name-z") {
+      const sortedProducts = products.toSorted((a, b) => {
+        return b.name.localeCompare(a.name, lang);
+      });
+      return { ...state, filtered_products: sortedProducts };
     }
-    if (sort === 'price-lowest') {
+    if (sort === "price-lowest") {
       const newProducts = products.toSorted((a, b) => {
         return a.price - b.price;
       });
       return { ...state, filtered_products: newProducts };
     }
-    if (sort === 'price-highest') {
+    if (sort === "price-highest") {
       const newProducts = products.toSorted((a, b) => {
         return b.price - a.price;
       });
@@ -92,36 +87,36 @@ const filter_reducer = (state, action) => {
     let tempProducts = [...all_products];
 
     let multicolor = false;
-    if (state.filters.color.includes(' ')) {
-      multicolor = state.filters.color.split(' ').map((color) => {
-        return ColorNamer(color).ntc[0].name.toLowerCase().replaceAll(' ', '');
+    if (state.filters.color.includes(" ")) {
+      multicolor = state.filters.color.split(" ").map((color) => {
+        return ColorNamer(color).ntc[0].name.toLowerCase().replaceAll(" ", "");
       });
-      multicolor = multicolor.join('and');
+      multicolor = multicolor.join("and");
     }
     tempProducts = tempProducts.filter((product) => {
       if (
-        (state.filters.text === '' ||
+        (state.filters.text === "" ||
           product.name.substring(0, state.filters.text.length) ===
             state.filters.text) &&
         product.price <= state.filters.price &&
         //Might Add In The Future
         // (state.filters.category === 'all' ||
         //   product.category === state.filters.category) &&
-        (state.filters.color === 'all' ||
+        (state.filters.color === "all" ||
           (multicolor
             ? product[`${multicolor}smallstock`] > 0 ||
               product[`${multicolor}largestock`] > 0
             : product[
                 `${ColorNamer(state.filters.color)
                   .ntc[0].name.toLowerCase()
-                  .replaceAll(' ', '')}smallstock`
+                  .replaceAll(" ", "")}smallstock`
               ] > 0 ||
               product[
                 `${ColorNamer(state.filters.color)
                   .ntc[0].name.toLowerCase()
-                  .replaceAll(' ', '')}largestock`
+                  .replaceAll(" ", "")}largestock`
               ] > 0)) &&
-        (state.filters.fabric === 'all' ||
+        (state.filters.fabric === "all" ||
           product.fabric === state.filters.fabric) &&
         (state.filters.shipping === false ||
           product.shipping === state.filters.shipping)
@@ -137,10 +132,10 @@ const filter_reducer = (state, action) => {
       ...state,
       filters: {
         ...state.filters,
-        text: '',
-        company: 'all',
-        category: 'all',
-        color: 'all',
+        text: "",
+        company: "all",
+        category: "all",
+        color: "all",
         price: state.filters.max_price,
         shipping: false,
       },

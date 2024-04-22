@@ -1,19 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import { services } from '../utils/constants';
-
+import React from "react";
+import styled from "styled-components";
+import { services } from "../utils/constants";
+import { useTranslation } from "react-i18next";
 const Services = () => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <div className="section-center">
         <article className="header">
-          <h3>
-            Well designed and <br /> Printed only for you
-          </h3>
-          <p>
-            Professional designers take into account the latest trends, fabrics,
-            and cuts to create pieces that are both stylish and comfortable!
-          </p>
+          <h3>{t("header_heading")}</h3>
+          <br />
+
+          <p>{t("header_text")}</p>
         </article>
         <div className="services-center">
           {services.map((service) => {
@@ -21,8 +19,8 @@ const Services = () => {
             return (
               <article key={id} className="service">
                 <span className="icon">{icon}</span>
-                <h4>{title}</h4>
-                <p>{text}</p>
+                <h4>{t(title)}</h4>
+                <p>{t(text)}</p>
               </article>
             );
           })}
@@ -33,8 +31,8 @@ const Services = () => {
 };
 
 const Wrapper = styled.section`
-  h3{
-    color: var(--clr-primary-1)
+  h3 {
+    color: var(--clr-primary-1);
   }
   h4 {
     color: var(--clr-primary-2);

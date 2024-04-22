@@ -1,86 +1,92 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { useCartContext } from '../context/cart_context';
-import { useUserContext } from '../context/user_context';
-import { formatPrice } from '../utils/helpers';
-import { useNavigate } from 'react-router-dom';
-import CreditCardForm from './CreditCardForm';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { useCartContext } from "../context/cart_context";
+import { useUserContext } from "../context/user_context";
+import { formatPrice } from "../utils/helpers";
+import { useNavigate } from "react-router-dom";
+import CreditCardForm from "./CreditCardForm";
+import { useTranslation } from "react-i18next";
 // const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const CheckoutForm = () => {
+  const { t } = useTranslation();
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
   const { myUser, handlePending, paymentPending } = useUserContext();
-const el = document.createElement('div')
-const moyasar = window.Moyasar;
+  const el = document.createElement("div");
+  const moyasar = window.Moyasar;
 
-const fetchPrice = async () => {
-  const data = await axios.post(
-      '/.netlify/functions/get-cart-price',
-      JSON.stringify({ cart}))
-  const res = data.data
+  const fetchPrice = async () => {
+    const data = await axios.post(
+      "/.netlify/functions/get-cart-price",
+      JSON.stringify({ cart })
+    );
+    const res = data.data;
 
-  moyasar.init({
-    element: el,
-    amount: res,
-    currency: 'SAR',
-    description: `Clothing Order`,
-    publishable_api_key: process.env.REACT_APP_MOYASAR_PUBLISHABLE_KEY,
-    callback_url: 'http://localhost:8888/greetings',
-    on_initiating: () => {
-      localStorage.setItem('pending', true)
-      return {}
-    },
-    supported_networks: [
-      'visa',
-      'mastercard',
-  ],
-    methods: ['creditcard', 'applepay'],
-    apple_pay: {
-      country: 'SA',
-      label: 'Just Jogging',
-      validate_merchant_url: 'https://api.moyasar.com/v1/applepay/initiate',
-  },
-  })
-  
-}
+    moyasar.init({
+      element: el,
+      amount: res,
+      currency: "SAR",
+      description: `Gift Order`,
+      publishable_api_key: process.env.REACT_APP_MOYASAR_PUBLISHABLE_KEY,
+      callback_url: "http://localhost:8888/greetings",
+      on_initiating: () => {
+        localStorage.setItem("pending", true);
+        return {};
+      },
+      supported_networks: ["visa", "mastercard"],
+      methods: ["creditcard", "applepay"],
+      apple_pay: {
+        country: "SA",
+        label: "Tahadi",
+        validate_merchant_url: "https://api.moyasar.com/v1/applepay/initiate",
+      },
+    });
+  };
 
-useEffect(() => {
-  fetchPrice()
-}, [])
+  useEffect(() => {
+    fetchPrice();
+  }, []);
 
+  useEffect(() => document.querySelector(".credit-card-form").append(el), []);
 
-useEffect(() => document.querySelector('.credit-card-form').append(el), [])
-
-
-  return <div className='mysr-form'>
-    <article>
-          <h4>Hello, {myUser ? myUser.displayName : 'User'}</h4>
-          <p>Your total is {formatPrice(shipping_fee + total_amount)}</p>
-          
-        </article>
-    <CreditCardForm/>
-  </div>
-    
+  return (
+    <div className="mysr-form">
+      <article>
+        <h4>
+          {t("hello")}, {myUser ? myUser.displayName : "User"}
+        </h4>
+        <p>
+          {t("your_total_is")} {formatPrice(shipping_fee + total_amount)}
+        </p>
+      </article>
+      <CreditCardForm />
+    </div>
+  );
 };
 
 const MoyasarCheckout = () => {
-  
-  const navigate = useNavigate()
-  if(!localStorage.getItem('shipping')) {
-    navigate('/shipping')
+  const navigate = useNavigate();
+  if (!localStorage.getItem("shipping")) {
+    navigate("/shipping");
   }
   return (
     <Wrapper>
-        <CheckoutForm />
+      <CheckoutForm />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
+  .mysr-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   form {
-
     width: 30vw;
+    max-width: 350px;
+    min-width: 300px;
     align-self: center;
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
       0px 2px 5px 0px rgba(50, 50, 93, 0.1),
@@ -175,7 +181,7 @@ const Wrapper = styled.section`
   .spinner:before,
   .spinner:after {
     position: absolute;
-    content: '';
+    content: "";
   }
   .spinner:before {
     width: 10.4px;

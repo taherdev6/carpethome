@@ -1,13 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <h5>
         &copy; {new Date().getFullYear()}
-        <span>Just Jogging</span>
+        <span> CarpetHome/بيت السجاد</span>
       </h5>
-      <h5>All Rights Reserved</h5>
+      <h5>{t("footer")}</h5>
     </Wrapper>
   );
 };

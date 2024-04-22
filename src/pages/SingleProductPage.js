@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import ColorNamer from 'color-namer';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useProductsContext } from '../context/products_context';
-import { single_product_url as url } from '../utils/constants';
-import { formatPrice } from '../utils/helpers';
+import React, { useEffect, useState } from "react";
+import ColorNamer from "color-namer";
+import { useParams, useNavigate } from "react-router-dom";
+import { useProductsContext } from "../context/products_context";
+import { single_product_url as url } from "../utils/constants";
+import { formatPrice } from "../utils/helpers";
 import {
   Loading,
   Error,
@@ -11,17 +11,20 @@ import {
   AddToCart,
   Stars,
   PageHero,
-} from '../components';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useElements } from '@stripe/react-stripe-js';
+} from "../components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useElements } from "@stripe/react-stripe-js";
+import { useTranslation } from "react-i18next";
 
 const SingleProductPage = () => {
-  if(localStorage.getItem('pending')) localStorage.removeItem('pending') 
-  const [mainColor, setMainColor] = useState('#000');
-  const [size, setSize] = useState('');
-  const [colors, setColors] = useState(['']);
-  const [changeState, setChangeState] = useState('');
+  const { t } = useTranslation();
+
+  if (localStorage.getItem("pending")) localStorage.removeItem("pending");
+  const [mainColor, setMainColor] = useState("#000");
+  const [size, setSize] = useState("");
+  const [colors, setColors] = useState([""]);
+  const [changeState, setChangeState] = useState("");
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -38,14 +41,14 @@ const SingleProductPage = () => {
   useEffect(() => {
     if (error) {
       setTimeout(() => {
-        navigate.push('/');
+        navigate.push("/");
       }, 3000);
     }
   }, [error]);
 
   if (loading) return <Loading />;
 
-  const {
+  let {
     name,
     price,
     description,
@@ -58,42 +61,47 @@ const SingleProductPage = () => {
     images,
   } = product;
   let colorDisplay;
-  if (mainColor.includes(' ')) {
+  if (mainColor.includes(" ")) {
     colorDisplay = mainColor
-      .split(' ')
+      .split(" ")
       .map((color) =>
-        ColorNamer(color).ntc[0].name.toLowerCase().replaceAll(' ', '')
+        ColorNamer(color).ntc[0].name.toLowerCase().replaceAll(" ", "")
       )
-      .join('and');
+      .join("and");
   } else {
     colorDisplay = mainColor;
   }
+
+  const nameArr = name.split(" ");
+  const productName = nameArr[0];
+  const productNumber = nameArr[1];
+  name = `${t(productName)} ${productNumber}`;
   return (
     <Wrapper>
       <PageHero title={name} product />
       <div className="section section-center page">
         <Link to="/products" className="btn">
-          back to products
+          {t("back_to_products")}
         </Link>
         <div className="product-center">
           <ProductImages images={images} />
           <section className="content">
             <h2>{name}</h2>
 
-            <Stars stars={stars} reviews={reviews} />
+            {/* <Stars stars={stars} reviews={reviews} /> */}
             <h5 className="price">{formatPrice(price)}</h5>
-            <p className="desc">{description}</p>
+            {/* <p className="desc">{description}</p> */}
             <p className="info">
-              <span>Available : </span>
+              <span>{t("available")} : </span>
               {stock === 0
-                ? 'Out Of Stock'
+                ? "Out Of Stock"
                 : product[
                     `${
-                      mainColor.includes(' ') ? colorDisplay : mainColor
+                      mainColor.includes(" ") ? colorDisplay : mainColor
                     }${size}stock`
                   ] > 0
-                ? 'In Stock'
-                : 'Out Of Stock'}
+                ? t("in_stock")
+                : t("out_of_stock")}
 
               {}
             </p>
