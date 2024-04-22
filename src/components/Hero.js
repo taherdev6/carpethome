@@ -59,20 +59,6 @@ const Hero = () => {
   });
   return (
     <Wrapper className="section-center">
-      {/* <article className="content">
-        <h1>
-          The outfits you <br />
-          are looking for
-        </h1>
-        <p>Enjoy shopping from a varied selection of high quality clothes !</p>
-        <Link to="/products" className="btn hero-btn">
-          shop now
-        </Link>
-      </article>
-      <article className="img-container">
-        <img src={heroBcg} alt="nice table" className="main-img" />
-        <img src={heroBcg2} alt="person working" className="accent-img" />
-      </article> */}
       <article className="content">
         <h1>
           The outfits you <br />
@@ -192,7 +178,6 @@ const Hero = () => {
 const Wrapper = styled.section`
   min-height: 60vh;
 
-  /* display: grid; */
   place-items: center;
   .img-container {
     display: none;
@@ -342,19 +327,12 @@ const Wrapper = styled.section`
   }
 
   .active-img {
-    /* display: block; */
     opacity: 1;
     visibility: visible;
+    .img {
+      object-fit: cover;
+    }
   }
-  /* @media (max-width: 580px) {
-    .content {
-      display: block;
-    }
-
-    .main {
-      display: none;
-    }
-  } */
 
   @media (max-width: 990px) {
     .main {

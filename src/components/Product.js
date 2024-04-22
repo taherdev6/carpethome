@@ -37,7 +37,7 @@ const Wrapper = styled.article`
   img {
     width: 100%;
     display: block;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: var(--radius);
     transition: var(--transition);
   }
