@@ -27,7 +27,7 @@ const CheckoutForm = () => {
       element: el,
       amount: res,
       currency: "SAR",
-      description: `Gift Order`,
+      description: `Carpet Order`,
       publishable_api_key: process.env.REACT_APP_MOYASAR_PUBLISHABLE_KEY,
       callback_url: "http://localhost:8888/greetings",
       on_initiating: () => {
